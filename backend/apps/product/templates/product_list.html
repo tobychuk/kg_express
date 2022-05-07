@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  {% csrf_token %}
   <h1>Список товара: </h1>
   {% for product in products %}
-    <h3>{{  product.name }}</h3>
-  {% endfor %}
+    <h3><a href="{% url 'product_detail' product.id %}">{{product.name}}</a></h3>
+    <img src="{{product.image.url}}" alt="Фото не найдено" width="300">
 
+  {% endfor %}
 {% endblock %}
