@@ -1,11 +1,22 @@
-{% extends 'base.html' %}
+{% extends 'base_tabler.html' %}
 
 {% block content %}
   {% csrf_token %}
-  <h1>Список товара: </h1>
-  {% for product in products %}
-    <h3><a href="{% url 'product_detail' product.id %}">{{product.name}}</a></h3>
-    <img src="{{product.image.url}}" alt="Фото не найдено" width="300">
+{% for product in products %}
+<div class="col-md-6 col-lg-3">
+                <div class="card">
+                  <div class="card-img-top img-responsive img-responsive-21x9" style="background-image: url({{product.image.url}})"></div>
+                  <div class="card-body">
+                    <h3 class="card-title">{{product.name}}</h3>
+                    <p class="text-muted">{{product.price}}сом</p>
+                      <div class="col-6 col-sm-4 col-md-2 col-xl mb-3">
+                        <a href="#" class="btn btn-success btn-pill w-200">
+                            Добавить в корзину
+                        </a>
+                      </div>
 
-  {% endfor %}
+                  </div>
+                </div>
+              </div>
+{% endfor %}
 {% endblock %}
