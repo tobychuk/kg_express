@@ -34,3 +34,18 @@ class Product(models.Model):
         verbose_name="Товар"
         verbose_name_plural ="Товары"
         ordering = ["-created"]
+
+
+class BanerImage(models.Model):
+    name = models.CharField('Название', max_length=50)
+    image = models.ImageField(upload_to="baners/")
+    add_link = models.URLField()
+    created = models.DateTimeField(auto_now_add=True)
+    update = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Картинка для баннера"
+        verbose_name_plural = "Картинки для баннера"
+
+    def __str__(self):
+        return self.name

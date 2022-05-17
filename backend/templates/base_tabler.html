@@ -20,6 +20,7 @@
     <link href="{% static 'dist/css/tabler-payments.min.css' %}" rel="stylesheet"/>
     <link href="{% static 'dist/css/tabler-vendors.min.css' %}" rel="stylesheet"/>
     <link href="{% static 'dist/css/demo.min.css' %}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/@tabler/icons@latest/iconfont/tabler-icons.min.css">
   </head>
   <body >
     <div class="page">
@@ -201,20 +202,20 @@
                         {% for category in categories %}
                           {% if category.subcategories.all %}
                         <div class="dropend">
-                          <a class="dropdown-item dropdown-toggle" href="#sidebar-cards" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
+                          <a class="dropdown-item dropdown-toggle" href="{% url 'category_products' category.slug %}" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                             {{category.name}}
                             <span class="badge badge-sm bg-green text-uppercase ms-2">New</span>
                           </a>
                           <div class="dropdown-menu">
                             {% for subcategory in category.subcategories.all %}
-                            <a href="./cards.html" class="dropdown-item">
+                            <a href="{% url 'subcategory_list' category.slug subcategory.slug %}" class="dropdown-item">
                               {{subcategory.name}}
                             </a>
                             {% endfor %}
                           </div>
                         </div>
                         {% else %}
-                        <a class="dropdown-item" href="./empty.html">
+                        <a class="dropdown-item" href="{% url 'category_products' category.slug %}">
                           {{category.name}}
                         </a>
                         {% endif %}
@@ -281,9 +282,11 @@
           <div class="page-header d-print-none">
             <div class="row g-2 align-items-center">
               <div class="col">
-                <h2 class="page-title">
-                  Empty page
-                </h2>
+                <h1 class="page-title">
+                  {% block page_title %}
+
+                  {% endblock %}
+                </h1>
               </div>
             </div>
           </div>
